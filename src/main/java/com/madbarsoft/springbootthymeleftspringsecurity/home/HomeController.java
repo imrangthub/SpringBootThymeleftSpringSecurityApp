@@ -23,11 +23,5 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/test")
-	public String test(Model model) {
-		List<BookEntity> bookList = bookService.list();
-		model.addAttribute("bookList", bookList);
-		return "test";
-	}
 
 }
