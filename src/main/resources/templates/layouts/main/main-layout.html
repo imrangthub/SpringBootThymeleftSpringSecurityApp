@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--  -->
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" > -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/bootstrap-4.3.1/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/application.css}"/>
+    <title>SPRING-BOOT</title>
+  </head>
+
+<body>
+
+		<!-- Main Header -->
+		<div th:replace="layouts/header/main-header :: header-main">
+
+		</div>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div layout:fragment="content">
+		<h1>This is Content Section</h1>
+		</div>
+
+		<!-- Main Footer -->
+		<div th:replace="layouts/footer/main-footer :: footer-main">
+
+		</div>
+
+
+	<!-- REQUIRED JS SCRIPTS -->
+    <script type="text/javascript" th:src="@{/js/application.js}"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" th:src="@{/vendor/jquery/jquery-3.4.1.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/popper/popper.js}"></script>
+    <script type="text/javascript" th:src="@{/vendor/bootstrap/bootstrap-4.3.1/js/bootstrap.js}"></script>
+</body>
+</html>
