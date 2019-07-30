@@ -7,11 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.madbarsoft.springbootthymeleftspringsecurity.book.BookEntity;
 
 @Controller
-@RequestMapping("/auth")
 public class AuthController {
 	
 	@GetMapping(value="/login")
 	public String create(Model model){
+		model.addAttribute("book", new BookEntity());
+		return "auth/login";
+	}
+		
+	
+	@RequestMapping("/403")
+	public String accessDenied(Model model) {
 		model.addAttribute("book", new BookEntity());
 		return "auth/login";
 	}
