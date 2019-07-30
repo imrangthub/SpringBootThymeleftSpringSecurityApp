@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {   // For Im - Memory Auth
+public class WebSecurityConfigInMemoryAuthentication extends WebSecurityConfigurerAdapter {   // For Im - Memory Auth
 	
 	 @Override
 	  public void configure(WebSecurity web) throws Exception {
@@ -29,7 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {   // For I
     protected void configure(HttpSecurity http) throws Exception {
         http
 	         .authorizeRequests()
-	     		 .antMatchers("/book/**").hasRole("USER")	
+	     		 .antMatchers("/book/**").hasRole("USER")
+	       		 .antMatchers("/admin/**").hasRole("ADMIN")	
 	             .antMatchers("/", "/home").permitAll()
 	             .antMatchers("/login").permitAll()
 	             .anyRequest().authenticated()
@@ -54,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {   // For I
 	    auth.inMemoryAuthentication()
 	    .withUser("imran").password(encoder.encode("123")).roles("USER")
 	    .and()
-	    .withUser("admin").password("12345").roles("USER", "ADMIN");
+	    .withUser("admin").password(encoder.encode("12345")).roles("USER", "ADMIN");
 	}
 
 	@Bean

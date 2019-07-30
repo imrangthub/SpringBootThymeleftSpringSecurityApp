@@ -19,7 +19,7 @@ public class AuthController {
 	@RequestMapping("/403")
 	public String accessDenied(Model model) {
 		model.addAttribute("book", new BookEntity());
-		return "auth/login";
+		return "auth/accessDenie";
 	}
 
 }
