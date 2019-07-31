@@ -1,0 +1,91 @@
+
+
+For Default Spring JdbcAuthentication
+===========================================================================================
+
+
+
+DROP TABLE IF EXISTS authorities;
+DROP TABLE IF EXISTS users;
+
+create table users (   
+  username varchar(50) not null primary key,
+  password varchar(255) not null,
+  enabled boolean not null) ;
+
+create table authorities (
+  username varchar(50) not null,
+  authority varchar(50) not null,
+  foreign key (username) references users (username),
+  unique index authorities_idx_1 (username, authority));
+  
+  
+  	-- USER: USER
+	-- PASSWORD: USER
+	
+    INSERT INTO authorities(username,authority) 
+	VALUES ('user', 'ROLE_USER');
+	
+	INSERT INTO users(username,password,enabled)
+	VALUES('user', '$2a$10$JvqOtJaDys0yoXPX9w47YOqu9wZr/PkN1dJqjG9HHAzMyu9EV1R4m', '1');
+
+	
+	- USER: admin
+	-- PASSWORD: admin
+	
+	INSERT INTO authorities(username,authority) 
+	VALUES ('admin', 'ROLE_USER');
+	
+	INSERT INTO users(username,password,enabled)
+	VALUES('admin', '$2a$10$Z5yQ/jevZ8RV6d9F.fkXM.98Z9xuBqECgrE7g9y2Dz78AcVUThtbG', '1');
+
+===========================================================================================
+
+
+
+For Custom Spring JdbcAuthentication
+===========================================================================================
+
+
+
+DROP TABLE IF EXISTS user_roles;
+DROP TABLE IF EXISTS users;
+
+CREATE  TABLE users (
+  username VARCHAR(45) NOT NULL ,
+  password VARCHAR(60) NOT NULL ,
+  enabled TINYINT NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (username));
+
+CREATE TABLE user_roles (
+  user_role_id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(45) NOT NULL,
+  role varchar(45) NOT NULL,
+  PRIMARY KEY (user_role_id),
+  UNIQUE KEY uni_username_role (role,username),
+  KEY fk_username_idx (username),
+  CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
+
+
+
+  	-- USER: USER
+	-- PASSWORD: USER
+	
+    INSERT INTO user_roles(username,role) 
+	VALUES ('user', 'ROLE_USER');
+	
+	INSERT INTO users(username,password,enabled)
+	VALUES('user', '$2a$10$JvqOtJaDys0yoXPX9w47YOqu9wZr/PkN1dJqjG9HHAzMyu9EV1R4m', true);
+
+	
+	-- USER: admin
+	-- PASSWORD: admin
+	
+	INSERT INTO user_roles(username,role) 
+	VALUES ('admin', 'ROLE_ADMIN');
+	
+	INSERT INTO users(username,password,enabled)
+	VALUES('admin', '$2a$10$Z5yQ/jevZ8RV6d9F.fkXM.98Z9xuBqECgrE7g9y2Dz78AcVUThtbG', true);
+	
+	
+===========================================================================================

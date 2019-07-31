@@ -15,6 +15,11 @@ public class BookService {
     public List<BookEntity> list(){
         return repository.list();
     }
+    
+
+    public List<BookEntity> removeBooklist(){
+        return repository.removeBooklist();
+    }
 
     public void saveOrUpdate(BookEntity obj){
         try{
@@ -33,6 +38,10 @@ public class BookService {
         return repository.findById(id);
     }
     
+    public BookEntity findByIdAllItem(Long id) {
+        return repository.findByIdAllItem(id);
+    }
+    
     public Boolean removeById(Long id){
         if(findById(id)!=null){
             return repository.remove(findById(id));
@@ -41,8 +50,8 @@ public class BookService {
     }
     
     public Boolean deleteById(Long id){
-        if(findById(id)!=null){
-            return repository.delete(findById(id));
+        if(findByIdAllItem(id)!=null){
+            return repository.delete(findByIdAllItem(id));
         }
         return false;
     }

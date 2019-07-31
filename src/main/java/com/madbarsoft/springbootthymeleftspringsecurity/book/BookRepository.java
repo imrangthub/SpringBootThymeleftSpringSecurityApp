@@ -26,6 +26,16 @@ public class BookRepository extends BaseRepository {
         );
         return entityManager.createQuery(criteria).getSingleResult();
     }
+	
+	public BookEntity findByIdAllItem(Long id) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<BookEntity> criteria = builder.createQuery( BookEntity.class );
+        Root<BookEntity> root = criteria.from(BookEntity.class);
+        criteria.select(root).where(
+                builder.equal(root.get("id"), id)
+        );
+        return entityManager.createQuery(criteria).getSingleResult();
+    }
 
     public List<BookEntity> list() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -34,6 +44,15 @@ public class BookRepository extends BaseRepository {
         criteria.select(root).where(builder.equal(root.get("isDeleted"), false));
         return entityManager.createQuery(criteria).getResultList();
     }
+    
+    public List<BookEntity> removeBooklist() {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<BookEntity> criteria = builder.createQuery( BookEntity.class );
+        Root<BookEntity> root = criteria.from(BookEntity.class);
+        criteria.select(root).where(builder.equal(root.get("isDeleted"), true));
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
 
     public Boolean save(BookEntity obj) {
         try{
@@ -54,15 +73,6 @@ public class BookRepository extends BaseRepository {
             return false;
         }
     }
-    public Boolean remove(BookEntity obj){
-        try{
-            obj.setDeleted(true);
-            entityManager.merge(obj);
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return false;
-    }
 
     public Boolean delete(BookEntity obj) {
         try{
@@ -72,6 +82,17 @@ public class BookRepository extends BaseRepository {
             ex.printStackTrace();
             return false;
         }
+    }
+    
+    
+    public Boolean remove(BookEntity obj){
+        try{
+            obj.setDeleted(true);
+            entityManager.merge(obj);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }

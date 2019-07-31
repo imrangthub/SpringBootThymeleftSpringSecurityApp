@@ -23,6 +23,7 @@ public class BookController {
 		return "book/index";
 	}
 	
+
 	@GetMapping(value="/view")
 	public String view(Model model, @RequestParam Long id){
 		BookEntity book = bookService.findById(id);
@@ -58,5 +59,7 @@ public class BookController {
 		model.addAttribute("bookList", bookList);
 		return "book/index";
 	}
+	
+	
 
 }

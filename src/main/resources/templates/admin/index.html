@@ -5,14 +5,45 @@
 	layout:decorator="layouts/main/main-layout">
 <head>
 <meta charset="ISO-8859-1"></meta>
-<title>SPRING-BOOT</title>
+<title>SPRING-BOOT || BOOK-HOME </title>
 </head>
 <body>
-	 <div class="container" layout:fragment="content" style="margin-top: 100px;">
-	 
+	  <div class="container" layout:fragment="content" style="margin-top: 50px;">
+	   <div class="row" style="margin-top: 100px;">
+	    <a class="btn btn-primary float-right" th:href="@{/book/list}"><span class="glyphicon glyphicon-plus"> </span> Book Home </a>    
+	  </div>
 	  <div class="row">
-      <h2>Welcome to Admin</h2>
+	   <div class="col-md-8  offset-md-2">
+	     <div class="row">
+	      <h2 class="pull-right">Delete Item List</h2>
 	  </div>  
+	  <p></p>    
+	  <table class="table" th:if="${removeBooklist!=null}" >
+	    <thead>
+	      <tr>
+	        <th>SL# </th>
+	        <th>Title</th>
+	        <th>Author Name</th>
+	        <th>Action</th>
+	      </tr>
+	    </thead>
+		<tbody>
+			<tr th:each="bookObj,status : ${removeBooklist}">
+				<td th:text="${status.count}"></td>
+				<td><span th:text="${bookObj.title}"></span></td>
+				<td th:text="${bookObj.authorName}"></td>												
+				<td>
+				  <div class="btn-group btn-group-sm">
+				    <a type="button" class="btn btn-primary" th:href="@{/admin/book-restore(id=${bookObj.id})}"><i class="fa fa-edit"></i>Re-store</a>
+				    <a type="button" class="btn btn-primary" th:href="@{/admin/book-delete(id=${bookObj.id})}"> <i class="fa fa-trash"></i>Delete Permanently</a>
+				  </div>
+				</td>
+			</tr>
+	    </tbody>
+	  </table>
+	   </div>
+	  </div>
 	</div>
 </body>
 </html>
+
